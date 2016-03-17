@@ -1,0 +1,41 @@
+﻿@model WebApplication1.Models.reverseHash
+
+@{
+    ViewBag.Title = "ReverseHash";
+}
+
+<h2>ReverseHash</h2>
+
+<div>
+    <h4>reverseHash</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @using (Html.BeginForm("ReverseHash", "Hash"))
+        {
+            @Html.TextBoxFor(model => model.plaintext)
+            <input type="submit" value="Calculate" />
+        }
+        @using (WebClient wc = new WebClient())
+        {
+            try {
+                wc.Headers[HttpRequestHeader.UserAgent] = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36";
+                string query = "http://md5.gromweb.com/query/" + Model.plaintext;
+                //Model.reversedHash = query;
+                var result = wc.DownloadString(query);
+                Model.reversedHash = result;
+            }
+            catch (System.Net.WebException e)
+            {
+                Model.reversedHash = "Please try again.";
+            }
+        }
+            <dt>
+                Plain text
+                @*@Html.DisplayNameFor(model => model.Value)*@
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.reversedHash)
+            </dd>
+</div>
+

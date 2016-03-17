@@ -1,0 +1,139 @@
+﻿@model WebApplication1.Models.VisualizeHash
+
+@{
+    ViewBag.Title = "Visualize Hash";
+}
+
+<h2>Visualize Hash</h2>
+<head>
+    <script src="jquery-1.11.3.min.js"></script>
+</head>
+<script type="text/javascript">
+    window.onload = function () {
+
+        // quick fill function to save repeating myself later
+        function fill(s, gx, gy) {
+            ctx.fillStyle = s;
+            ctx.fillRect(gx * size, gy * size, size, size);
+        }
+        // block size
+        var size = 25;
+
+        // get some info about the canvas
+        var canvas = document.getElementById('c');
+        var ctx = canvas.getContext('2d');
+
+        // how many cells fit on the canvas
+        var w = ~~(canvas.width / size);
+        var h = ~~(canvas.height / size);
+
+        // create empty state array
+        var state = new Array(h);
+        for (var y = 0; y < h; ++y) {
+            state[y] = new Array(w);
+        }
+
+        var a2 =  @Html.Raw(Json.Encode(ViewBag.a));
+        //Fill Code for visualizing hashes
+        //var bitsx = [1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1];
+        var items = [[1, 0], [1, 1], [0, 0]];
+       // var bitsy = [1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1];
+        for (var i = 1; i < w; i++) {
+            for (var x = 1; x < h; x++) {
+                if (a2[i][x] == "1" ) {
+                    fill('black', x, i);
+                }
+            }
+        }
+
+
+        // click event, using jQuery for cross-browser convenience
+        $(canvas).click(function (e) {
+
+            // get mouse click position
+            var mx = e.offsetX;
+            var my = e.offsetY;
+
+            // calculate grid square numbers
+            var gx = ~~(mx / size);
+            var gy = ~~(my / size);
+
+            // make sure we're in bounds
+            if (gx < 0 || gx >= w || gy < 0 || gy >= h) {
+                return;
+            }
+
+            if (state[gy][gx]) {
+                // if pressed before, flash red
+                fill('red', gx, gy);
+                setTimeout(function () {
+                    fill('black', gx, gy)
+                }, 1000);
+            } else {
+                state[gy][gx] = true;
+                fill('black', gx, gy);
+            }
+        });
+    };
+</script>
+
+<div>
+    <h4>VisualizeHash</h4>
+    <hr />
+
+    @using (Html.BeginForm("Details", "VisualizeHash"))
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Plaintext
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.hashString)
+            </dd>
+
+            <dt>
+                Round no
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.RoundNo)
+            </dd>
+            <dd><input type="submit" value="Calculate" /></dd>
+        </dl>
+    }
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hashString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hashString)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.hashValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hashValue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.binString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.binString)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.maxRound)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maxRound)
+        </dd>
+    </dl>
+    <canvas id="c" width="800" height="600"></canvas>
+
+
+</div>

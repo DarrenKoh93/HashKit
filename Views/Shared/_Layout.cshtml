@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hashkit", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Hash
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Hash", "Details", "Hash")</li>
+                                <li>@Html.ActionLink("ReverseHash", "ReverseHash", "Hash")</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Analysing Hash
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("AnalyseHash", "Details", "AnalyseHash")</li>
+                                <li>@Html.ActionLink("Chart", "Details", "Chart")</li>
+                                <li>@Html.ActionLink("VisualizeHash", "Details", "VisualizeHash")</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                Attack Hash
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Collision Generation", "colGen", "AttackHash")</li>
+                                <li>@Html.ActionLink("Birthday Attack", "bdaeAtk", "AttackHash")</li>
+                                <li>@Html.ActionLink("Collison Resistant Benchmark", "colResistBench", "AttackHash")</li>
+                            </ul>
+                        </div>
+                    </li>
+
+                        @*Html.Partial("_LoginPartial")*@
+</div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

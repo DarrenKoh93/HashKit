@@ -1,0 +1,43 @@
+﻿@model WebApplication1.Models.customMD5
+
+@{
+    ViewBag.Title = "Hash Functions";
+}
+
+<h2>Hash Functions</h2>
+
+<div>
+    <h4>MD5</h4>
+    <hr />
+
+
+        @using (Html.BeginForm("Details", "Hash"))
+        {
+            @Html.TextBoxFor(m => m.Value)
+            <input type="submit" value="Calculate" />
+        }
+    <dl class="dl-horizontal">
+        <dt>
+            Hash String
+            @*@Html.DisplayNameFor(model => model.Value)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+                @*@Html.DisplayNameFor(model => model.FingerPrint)*@
+                Hash Result
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FingerPrint)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+        }
+    </div>

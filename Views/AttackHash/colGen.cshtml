@@ -1,0 +1,103 @@
+﻿@model WebApplication1.Models.colGen
+
+@{
+    ViewBag.Title = "colGen";
+}
+
+<h2>colGen</h2>
+
+<div>
+    <h4>Collision Generation.</h4>
+    <hr />
+@using (Html.BeginForm("colGen", "AttackHash"))
+{
+    <dl class="dl-horizontal">
+
+        <dt>
+            hashChoice
+        </dt>
+
+        <dd>
+            @{
+                List<SelectListItem> hashChoiceList = new List<SelectListItem>();
+                hashChoiceList.Add(new SelectListItem { Value = "1", Text = "MD5" });
+                hashChoiceList.Add(new SelectListItem { Value = "2", Text = "SHA1" });
+            }
+           @Html.DropDownListFor(model => model.hashChoice, hashChoiceList)
+        </dd>
+
+        <dt>
+            Timeout for doing.
+        </dt>
+
+        <dd>
+            @{
+                List<SelectListItem> timeChoiceList = new List<SelectListItem>();
+                timeChoiceList.Add(new SelectListItem { Value = "10", Text = "10s" });
+                timeChoiceList.Add(new SelectListItem { Value = "20", Text = "20s" });
+                timeChoiceList.Add(new SelectListItem { Value = "3600", Text = "1hr" });
+            }
+            @Html.DropDownListFor(model => model.timeChoice, timeChoiceList)
+        </dd>
+
+        <dt>
+            lengthChoice
+        </dt>
+
+        <dd>
+            @{
+                List<SelectListItem> md5List = new List<SelectListItem>();
+                md5List.Add(new SelectListItem { Value = "1", Text = "1" });
+                md5List.Add(new SelectListItem { Value = "2", Text = "2" });
+                md5List.Add(new SelectListItem { Value = "3", Text = "3" });
+                md5List.Add(new SelectListItem { Value = "4", Text = "4" });
+                md5List.Add(new SelectListItem { Value = "5", Text = "5" });
+                md5List.Add(new SelectListItem { Value = "6", Text = "6" });
+                md5List.Add(new SelectListItem { Value = "7", Text = "7" });
+                md5List.Add(new SelectListItem { Value = "8", Text = "8" });
+                md5List.Add(new SelectListItem { Value = "9", Text = "9" });
+                md5List.Add(new SelectListItem { Value = "10", Text = "10" });
+                md5List.Add(new SelectListItem { Value = "11", Text = "11" });
+                md5List.Add(new SelectListItem { Value = "12", Text = "12" });
+                md5List.Add(new SelectListItem { Value = "13", Text = "13" });
+                md5List.Add(new SelectListItem { Value = "14", Text = "14" });
+                md5List.Add(new SelectListItem { Value = "15", Text = "15" });
+                md5List.Add(new SelectListItem { Value = "16", Text = "16" });
+
+
+
+                List<SelectListItem> sha1List = new List<SelectListItem>();
+                sha1List.Add(new SelectListItem { Value = "1", Text = "1" });
+                sha1List.Add(new SelectListItem { Value = "2", Text = "2" });
+                sha1List.Add(new SelectListItem { Value = "3", Text = "3" });
+                sha1List.Add(new SelectListItem { Value = "4", Text = "4" });
+                sha1List.Add(new SelectListItem { Value = "5", Text = "5" });
+                sha1List.Add(new SelectListItem { Value = "6", Text = "6" });
+                sha1List.Add(new SelectListItem { Value = "7", Text = "7" });
+                sha1List.Add(new SelectListItem { Value = "8", Text = "8" });
+                sha1List.Add(new SelectListItem { Value = "9", Text = "9" });
+                sha1List.Add(new SelectListItem { Value = "10", Text = "10" });
+                sha1List.Add(new SelectListItem { Value = "11", Text = "11" });
+                sha1List.Add(new SelectListItem { Value = "12", Text = "12" });
+                sha1List.Add(new SelectListItem { Value = "13", Text = "13" });
+                sha1List.Add(new SelectListItem { Value = "14", Text = "14" });
+                sha1List.Add(new SelectListItem { Value = "15", Text = "15" });
+                sha1List.Add(new SelectListItem { Value = "16", Text = "16" });
+                sha1List.Add(new SelectListItem { Value = "17", Text = "17" });
+                sha1List.Add(new SelectListItem { Value = "18", Text = "18" });
+                sha1List.Add(new SelectListItem { Value = "19", Text = "19" });
+                sha1List.Add(new SelectListItem { Value = "20", Text = "20" });
+
+            }
+
+                @Html.DropDownListFor(model => model.lengthChoice, sha1List)
+
+        </dd>
+        <dd><input type="submit" value="Submit" /></dd>
+    </dl>
+
+                }
+@Html.Raw(Html.Encode(Model.result).Replace("\n", "<br />"))
+
+</div>
+

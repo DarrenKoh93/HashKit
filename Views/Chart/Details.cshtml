@@ -1,0 +1,28 @@
+﻿@model WebApplication1.Models.ViewChartModel
+
+@{
+    ViewBag.Title = "View Chart";
+}
+
+<h2>View Chart</h2>
+<form method="post">
+    <div>
+        <h4>View Chart</h4>
+        <hr />
+
+        @{ Html.RenderAction("DisplayChart"); }
+
+        <hr />
+        @{ Html.RenderAction("DisplayChart2"); }
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.RadioButton("FORMAT", "PNG",
+         new { id = "PNG" }) PNG
+                @Html.RadioButton("FORMAT", "PDF",
+          new { id = "PDF" }) PDF
+            </div>
+        }
+        <input type="submit" name="Export" value="Export" />
+    </div>
+</form>
